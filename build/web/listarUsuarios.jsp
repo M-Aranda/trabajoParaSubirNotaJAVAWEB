@@ -46,6 +46,7 @@
             List<UsuarioNormal> usuariosNormales = du.read();
             List<Administrador> usuariosAdministradores = da.read();
 
+            
             int idAdministradorActual = a.getId();
 
             for (int i = 0; i < usuariosAdministradores.size(); i++) {
@@ -73,7 +74,7 @@
                     <td><%=admin.getNombre()%></td>
                     <td><%=admin.getRol().getTipo()%></td>
                     <td>
-                        <form action="prepararEliminacion.do.do" method="POST">
+                        <form action="prepararEliminacion.do" method="POST">
                             <input type="hidden" name="idAEliminar" value=<%=admin.getId()%>>
                             <input type="hidden" name="tipo" value=<%=admin.getRol().getId()%>>
                             <input type="submit" value="Eliminar">

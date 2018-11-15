@@ -57,12 +57,12 @@
         <%
             if (request.getSession().getAttribute("casaProp") != null) {
                 Casa ejDeCasa = (Casa) request.getSession().getAttribute("casaProp");
-                
-                List<Casa>unaListaDeCasas=(List<Casa>)request.getSession().getAttribute("listaDeCasas");
-                int cantCasas=unaListaDeCasas.size();
-              %>
-              <h3>Casas de <%=ejDeCasa.getNomPropietario()%> [<%=ejDeCasa.getRutPropietario()%>] (<%=cantCasas%>)</h3> 
-            <%}
+
+                List<Casa> unaListaDeCasas = (List<Casa>) request.getSession().getAttribute("listaDeCasas");
+                int cantCasas = unaListaDeCasas.size();
+        %>
+        <h3>Casas de <%=ejDeCasa.getNomPropietario()%> [<%=ejDeCasa.getRutPropietario()%>] (<%=cantCasas%>)</h3> 
+        <%}
         %>
         <br>
         <table border="1">
@@ -106,10 +106,14 @@
 
         %>
 
-        
-        if(){
-        }
-        <a href="menu.jsp">Volver</a>
-        
+
+        <% if (a != null) {%>
+        <a href="menu.jsp">Volver</a>  
+        <%} else if (u != null) {%>
+        <a href="bienvenidoUsuario.jsp">Volver</a>
+            <%}
+        %>
+
+
     </body>
 </html>

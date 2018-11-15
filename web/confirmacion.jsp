@@ -35,8 +35,8 @@
 
 
 
-        <%  int id = (int) request.getSession().getAttribute("idUsuarioABorrar");
-            int tipo = (int) request.getSession().getAttribute("tipoDeUsuarioABorrar");
+        <%  int id = Integer.parseInt( (String)request.getSession().getAttribute("idUsuarioABorrar"));
+            int tipo = Integer.parseInt((String)request.getSession().getAttribute("tipoDeUsuarioABorrar")) ;
 
             String nombre = "";
             String rut = "";

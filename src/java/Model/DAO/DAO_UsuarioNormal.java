@@ -34,7 +34,7 @@ public class DAO_UsuarioNormal extends Conexion implements DAO<UsuarioNormal> {
         List<UsuarioNormal> lista = new ArrayList<>();
         try {
             DAO_Rol dr = new DAO_Rol();
-            ResultSet rs = ejecutar("SELECT * FROM administrador");
+            ResultSet rs = ejecutar("SELECT * FROM usuarioNormal");
 
             UsuarioNormal u = null;
 

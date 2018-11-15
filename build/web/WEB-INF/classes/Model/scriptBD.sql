@@ -43,8 +43,8 @@ INSERT INTO rol VALUES(NULL, 'Usuario Normal');
 INSERT INTO rol VALUES(NULL, 'Administrador');
 
 INSERT INTO administrador VALUES (NULL, '11-1', 'Marcelo Aranda','admin',2);
-INSERT INTO usuarioNormal VALUES (NULL, '22-2', 'Marcelo Aranda','hola',1);
-INSERT INTO usuarioNormal VALUES (NULL, '33-3', 'Marcelo Aranda','123',1);
+INSERT INTO usuarioNormal VALUES (NULL, '22-2', 'Gonzalo','hola',1);
+INSERT INTO usuarioNormal VALUES (NULL, '33-3', 'Lena Oxton','123',1);
 
 
 INSERT INTO casa VALUES(NULL, 'El Roble 1980', 300, '20','Caty', 30000);
@@ -52,5 +52,8 @@ INSERT INTO casa VALUES(NULL, 'El Roble 2300', 300, '20','Caty', 30000);
 INSERT INTO casa VALUES(NULL, 'El Roble 1990', 300, '20','Caty', 30000);
 INSERT INTO casa VALUES(NULL, 'El Roble 101', 300, '30','Casandra', 30000);
 
+
+-- SELECT * FROM usuarioNormal;
+-- SELECT * FROM administrador;
 
 -- DROP DATABASE ejercicioParaSubirNotaJavaWeb;
