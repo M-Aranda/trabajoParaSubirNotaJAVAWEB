@@ -41,7 +41,7 @@
 
 
         <form action="buscarPorRol.do" method="POST">
-            <input type="number" name="buscarPorRol" placeholder="N de rol">
+            <input type="number" name="buscarPorRol" placeholder="N° de rol">
             <input type="submit" value="Buscar por rol">
         </form>
         <br>
@@ -64,11 +64,15 @@
         <h3>Casas de <%=ejDeCasa.getNomPropietario()%> [<%=ejDeCasa.getRutPropietario()%>] (<%=cantCasas%>)</h3> 
         <%}
         %>
+
+        <% if (request.getSession().getAttribute("msg") != null) {%>
+        <h3><%=request.getSession().getAttribute("msg")%></h3>  
+        <%}%>
         <br>
         <table border="1">
             <thead>
                 <tr>
-                    <th>N de rol</th>
+                    <th>N° de rol</th>
                     <th>Dirección</th>
                     <th>Metros cuadrados</th>
                     <th>Propietario</th>
@@ -102,17 +106,23 @@
         <%
             if (request.getSession().getAttribute("listaDeCasas") != null) {
                 request.getSession().removeAttribute("listaDeCasas");
+
+            }
+            if (request.getSession().getAttribute("msg") != null) {
+                request.getSession().removeAttribute("msg");
             }
 
+            if (request.getSession().getAttribute("casaProp") != null) {
+                request.getSession().removeAttribute("casaProp");
+            }
+
+
         %>
 
 
-        <% if (a != null) {%>
-        <a href="menu.jsp">Volver</a>  
-        <%} else if (u != null) {%>
-        <a href="bienvenidoUsuario.jsp">Volver</a>
-            <%}
-        %>
+
+        <a href="menu.jsp">Volver</a>
+
 
 
     </body>

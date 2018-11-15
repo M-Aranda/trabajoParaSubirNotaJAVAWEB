@@ -75,7 +75,7 @@ public class IniciarSesionServlet extends HttpServlet {
                     //es un usuario valido
                     UsuarioNormal usu = du.findByRutContr(rut, contrasenia);
                     request.getSession().setAttribute("usuario", usu);
-                    redireccionaA = "bienvenidoUsuario.jsp";
+                    redireccionaA = "menu.jsp";
 
                 } else if (da.adminCorrecto(rut, contrasenia) == true) {
                     //es un admin valido

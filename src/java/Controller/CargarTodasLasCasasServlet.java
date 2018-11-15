@@ -53,6 +53,7 @@ public class CargarTodasLasCasasServlet extends HttpServlet {
                 List<Casa> lista = dc.read();
 
                 request.getSession().setAttribute("listaDeCasas", lista);
+                request.getSession().setAttribute("msg", "Todas las casas");
 
                 redireccionaA="listarCasas.jsp";
             }

@@ -57,6 +57,8 @@ public class BuscarPorRolServlet extends HttpServlet {
                 lista.add(c);
                 request.getSession().setAttribute("listaDeCasas", lista);
                 redireccionaA="listarCasas.jsp";
+                
+                request.getSession().setAttribute("msg", "Casa rol n°"+idCasa);
             }
 
             response.sendRedirect(redireccionaA);

@@ -64,7 +64,7 @@ public class DAO_UsuarioNormal extends Conexion implements DAO<UsuarioNormal> {
 
     @Override
     public void delete(int id) throws SQLException {
-        ejecutar("DELETE FROM usuario WHERE id=" + id + " ");
+        ejecutar("DELETE FROM usuarioNormal WHERE id=" + id + " ");
     }
 
     public Boolean usuarioCorrecto(String rut, String contrasenia) throws SQLException {

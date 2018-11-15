@@ -57,7 +57,7 @@ public class PrepararEliminacionServlet extends HttpServlet {
         if (sesionOk == true) {
             request.getSession().setAttribute("idUsuarioABorrar", request.getParameter("idAEliminar"));
             request.getSession().setAttribute("tipoDeUsuarioABorrar", request.getParameter("tipo"));
-            redireccionaA="confirmacion.jsp";
+            redireccionaA = "confirmacion.jsp";
         }
 
         response.sendRedirect(redireccionaA);

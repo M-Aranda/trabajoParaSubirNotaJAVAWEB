@@ -17,7 +17,7 @@
         <%
             UsuarioNormal u = null;
             Administrador a = null;
-            
+
             if ((request.getSession().getAttribute("usuario") == null) && (request.getSession().getAttribute("administrador") == null)) {
                 request.getSession().setAttribute("error", "Debe iniciar sesión");
                 response.sendRedirect("error.jsp");
@@ -30,6 +30,19 @@
         %>
 
 
+        <%
+            Boolean esAdmin = false;
+
+            if (a != null) {
+                //es un admin
+                esAdmin = true;
+            } else if (u != null) {
+                //es un usuario
+                esAdmin = false;
+            }
+        %>
+
+        <%if (esAdmin == true) {%>
         <h1>Bienvenido <%=a.getNombre()%> </h1>
         <br>
         <a href="crearCasa.jsp">Crear casas</a>
@@ -41,7 +54,15 @@
         <a href="listarUsuarios.jsp">List/Eliminar a un usuario</a>
         <br>
         <br>
+        <a href="cerrarSesion.do">Cerrar Sesión</a>
+        <%}%><%else if (esAdmin == false) {%>
+        <h1>Bienvenido <%=u.getNombre()%> </h1>
+        <br>
+        <a href="listarCasas.jsp">Listar/Buscar casas</a>
         <br>
         <a href="cerrarSesion.do">Cerrar Sesión</a>
+        <% }%>
+
+
     </body>
 </html>
