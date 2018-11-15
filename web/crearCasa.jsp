@@ -6,11 +6,13 @@
 
 <%@page import="Model.Administrador"%>
 <%@page import="Model.UsuarioNormal"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="iso-8859-1" contentType="text/html; charset=iso-8859-1" session="true"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
         <title>Crear casa</title>
     </head>
     <body>
@@ -19,7 +21,7 @@
             Administrador a = null;
             
             if ((request.getSession().getAttribute("usuario") == null) && (request.getSession().getAttribute("administrador") == null)) {
-                request.getSession().setAttribute("error", "Debe iniciar sesiÃ³n");
+                request.getSession().setAttribute("error", "Debe iniciar sesión");
                 response.sendRedirect("error.jsp");
             } else if (request.getSession().getAttribute("usuario") != null) {
                 u = (UsuarioNormal) request.getSession().getAttribute("usuario");
@@ -35,9 +37,9 @@
         <form action="crearCasa.do" method="POST">
             <input type="text" name="rol" placeholder="Rol" required>
             <br>
-            <input type="text" name="direccion" placeholder="DirecciÃ³n" required>
+            <input type="text" name="direccion" placeholder="Dirección" required>
             <br>
-            <input type="text" name="metrosCuadrados" placeholder="Metros cuadrados" required>
+            <input type="number" name="metrosCuadrados" placeholder="Metros cuadrados" required>
             <br>
             <input type="number" name="avaluoFiscal" placeholder="Avaluo fiscal" required>
             <br>

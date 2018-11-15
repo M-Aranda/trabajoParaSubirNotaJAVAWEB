@@ -6,11 +6,11 @@
 
 <%@page import="Model.UsuarioNormal"%>
 <%@page import="Model.Administrador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="iso-8859-1" contentType="text/html; charset=iso-8859-1" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
         <title>Menu admin</title>
     </head>
     <body>
@@ -19,7 +19,7 @@
             Administrador a = null;
 
             if ((request.getSession().getAttribute("usuario") == null) && (request.getSession().getAttribute("administrador") == null)) {
-                request.getSession().setAttribute("error", "Debe iniciar sesiÃ³n");
+                request.getSession().setAttribute("error", "Debe iniciar sesión");
                 response.sendRedirect("error.jsp");
             } else if (request.getSession().getAttribute("usuario") != null) {
                 u = (UsuarioNormal) request.getSession().getAttribute("usuario");
@@ -32,17 +32,22 @@
 
         <%
             Boolean esAdmin = false;
+            Boolean SesionOk=false;
 
             if (a != null) {
                 //es un admin
                 esAdmin = true;
+                SesionOk=true;
             } else if (u != null) {
                 //es un usuario
                 esAdmin = false;
+                SesionOk=true;
+            }else if((a!=null)&&(u!=null)){
+                SesionOk=false;
             }
         %>
 
-        <%if (esAdmin == true) {%>
+        <%if ((esAdmin == true)&&(SesionOk==true)) {%>
         <h1>Bienvenido <%=a.getNombre()%> </h1>
         <br>
         <a href="crearCasa.jsp">Crear casas</a>
@@ -54,13 +59,13 @@
         <a href="listarUsuarios.jsp">List/Eliminar a un usuario</a>
         <br>
         <br>
-        <a href="cerrarSesion.do">Cerrar SesiÃ³n</a>
-        <%}%><%else if (esAdmin == false) {%>
+        <a href="cerrarSesion.do">Cerrar Sesión</a>
+        <%}%><%else if ((esAdmin == false)&&(SesionOk==true)) {%>
         <h1>Bienvenido <%=u.getNombre()%> </h1>
         <br>
         <a href="listarCasas.jsp">Listar/Buscar casas</a>
         <br>
-        <a href="cerrarSesion.do">Cerrar SesiÃ³n</a>
+        <a href="cerrarSesion.do">Cerrar Sesión</a>
         <% }%>
 
 

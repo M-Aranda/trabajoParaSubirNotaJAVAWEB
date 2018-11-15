@@ -9,11 +9,11 @@
 <%@page import="Model.DAO.DAO_Casa"%>
 <%@page import="Model.UsuarioNormal"%>
 <%@page import="Model.Administrador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="iso-8859-1" contentType="text/html; charset=iso-8859-1" session="true"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Listado de casas</title>
     </head>
     <body>
@@ -22,7 +22,7 @@
             Administrador a = null;
 
             if ((request.getSession().getAttribute("usuario") == null) && (request.getSession().getAttribute("administrador") == null)) {
-                request.getSession().setAttribute("error", "Debe iniciar sesiÃ³n");
+                request.getSession().setAttribute("error", "Debe iniciar sesión");
                 response.sendRedirect("error.jsp");
             } else if (request.getSession().getAttribute("usuario") != null) {
                 u = (UsuarioNormal) request.getSession().getAttribute("usuario");
@@ -41,7 +41,7 @@
 
 
         <form action="buscarPorRol.do" method="POST">
-            <input type="number" name="buscarPorRol" placeholder="NÂ° de rol">
+            <input type="number" name="buscarPorRol" placeholder="N° de rol">
             <input type="submit" value="Buscar por rol">
         </form>
         <br>
@@ -72,8 +72,8 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>NÂ° de rol</th>
-                    <th>DirecciÃ³n</th>
+                    <th>N° de rol</th>
+                    <th>Dirección</th>
                     <th>Metros cuadrados</th>
                     <th>Propietario</th>
                     <th>Avaluo Fiscal</th>

@@ -5,11 +5,11 @@
 --%>
 
 <%@page import="Model.Administrador"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="iso-8859-1" contentType="text/html; charset=iso-8859-1" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
         <title>Crear usuarios</title>
     </head>
     <body>
@@ -21,7 +21,7 @@
             if (request.getSession().getAttribute("administrador") != null) {
                 a = (Administrador) request.getSession().getAttribute("administrador");
             } else if (request.getSession().getAttribute("administrador") == null) {
-                request.getSession().setAttribute("error", "Debe iniciar sesiÃ³n");
+                request.getSession().setAttribute("error", "Debe iniciar sesión");
                 response.sendRedirect("error.jsp");
             }
         %>
@@ -31,7 +31,7 @@
             <br>
             <input type="text" name="nombre"  placeholder="Nombre:" required>
             <br>
-            <input type="password" name="contrasenia"  placeholder="ContraseÃ±a:" required>
+            <input type="password" name="contrasenia"  placeholder="Contraseña:" required>
             <br>
             <input type="radio" name="tipo" value="2">Administrador
             <br>
@@ -41,6 +41,6 @@
         </form>
 
         <br>
-        <a href="menu.jsp">Volver al menÃº</a>
+        <a href="menu.jsp">Volver al menú</a>
     </body>
 </html>
