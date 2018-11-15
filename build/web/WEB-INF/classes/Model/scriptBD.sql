@@ -30,7 +30,7 @@ PRIMARY KEY(id)
 
 
 CREATE TABLE casa(
-id INT AUTO_INCREMENT, -- el id es el numero de rol
+id INT, -- AUTO_INCREMENT, -- el id es el numero de rol
 direccion VARCHAR (60),
 metrosCuadrados INT,
 rutProp VARCHAR (40),
@@ -47,10 +47,10 @@ INSERT INTO usuarioNormal VALUES (NULL, '22-2', 'Gonzalo','bien',1);
 INSERT INTO usuarioNormal VALUES (NULL, '33-3', 'Lena Oxton','123',1);
 
 
-INSERT INTO casa VALUES(NULL, 'El Roble 1980', 300, '20','Caty', 30000);
-INSERT INTO casa VALUES(NULL, 'El Roble 2300', 300, '20','Caty', 30000);
-INSERT INTO casa VALUES(NULL, 'El Roble 1990', 300, '20','Caty', 30000);
-INSERT INTO casa VALUES(NULL, 'El Roble 101', 300, '30','Casandra', 30000);
+INSERT INTO casa VALUES(111, 'El Roble 1980', 300, '20','Caty', 30000);
+INSERT INTO casa VALUES(222, 'El Roble 2300', 300, '20','Caty', 30000);
+INSERT INTO casa VALUES(333, 'El Roble 1990', 300, '20','Caty', 30000);
+INSERT INTO casa VALUES(444, 'El Roble 101', 300, '30','Casandra', 30000);
 
 
 -- SELECT * FROM usuarioNormal;

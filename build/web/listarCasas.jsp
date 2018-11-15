@@ -62,8 +62,8 @@
                 int cantCasas = unaListaDeCasas.size();
         %>
         <h3>Casas de <%=ejDeCasa.getNomPropietario()%> [<%=ejDeCasa.getRutPropietario()%>] (<%=cantCasas%>)</h3> 
-        <%}
-        %>
+        <%}%>
+        
 
         <% if (request.getSession().getAttribute("msg") != null) {%>
         <h3><%=request.getSession().getAttribute("msg")%></h3>  

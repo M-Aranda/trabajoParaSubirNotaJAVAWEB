@@ -24,7 +24,8 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
 
     @Override
     public void create(Casa ob) throws SQLException {
-        ejecutar("INSERT INTO casa VALUES (NULL, '" + ob.getDireccion() + "', " + ob.getMetrosCuadrados() + ", '" + ob.getRutPropietario()+ "','"+ob.getNomPropietario()+"', " + ob.getAvaluoFiscal() + "    )");
+        //ejecutar("INSERT INTO casa VALUES (NULL, '" + ob.getDireccion() + "', " + ob.getMetrosCuadrados() + ", '" + ob.getRutPropietario()+ "','"+ob.getNomPropietario()+"', " + ob.getAvaluoFiscal() + "    )");
+        ejecutar("INSERT INTO casa VALUES ("+ob.getId()+", '" + ob.getDireccion() + "', " + ob.getMetrosCuadrados() + ", '" + ob.getRutPropietario()+ "','"+ob.getNomPropietario()+"', " + ob.getAvaluoFiscal() + "    )");
     }
 
     @Override
@@ -100,6 +101,18 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
         close();
         return lista;
     }
+     
+     
+     public Boolean idSeRepite(int id) throws SQLException{
+         Boolean seRepite=false;
+         
+         Casa c=findById(id);
+         if(c==null){
+             seRepite=true;
+         }
+         
+         return seRepite;
+     }
     
     
 }

@@ -53,12 +53,32 @@ public class BuscarPorRolServlet extends HttpServlet {
                 DAO_Casa dc = new DAO_Casa();
 
                 Casa c = dc.findById(idCasa);
-                List<Casa> lista = new ArrayList<>();//haciendo una lista para que las 3 maneras de buscar casas tengan mas en comun
-                lista.add(c);
-                request.getSession().setAttribute("listaDeCasas", lista);
-                redireccionaA="listarCasas.jsp";
-                
-                request.getSession().setAttribute("msg", "Casa rol n°"+idCasa);
+                if (c == null) {
+                    c = new Casa();
+                    c.setId(0);
+                    c.setDireccion("Sin dirección");
+                    c.setMetrosCuadrados(0);
+                    c.setAvaluoFiscal(0);
+                    c.setNomPropietario("Ninguno");
+                    c.setRutPropietario("Ninguno");
+
+                    List<Casa> lista = new ArrayList<>();
+                            
+                    lista.add(c);
+                    request.getSession().setAttribute("listaDeCasas", lista);
+                    redireccionaA = "listarCasas.jsp";
+
+                    request.getSession().setAttribute("msg", "No hay ninguna casa con rol n° " + idCasa);
+
+                } else if (c != null) {
+                    List<Casa> lista = new ArrayList<>();//haciendo una lista para que las 3 maneras de buscar casas tengan mas en comun
+                    lista.add(c);
+                    request.getSession().setAttribute("listaDeCasas", lista);
+                    redireccionaA = "listarCasas.jsp";
+
+                    request.getSession().setAttribute("msg", "Casa rol n°" + idCasa);
+                }
+
             }
 
             response.sendRedirect(redireccionaA);

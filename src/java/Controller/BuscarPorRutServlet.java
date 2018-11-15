@@ -52,13 +52,34 @@ public class BuscarPorRutServlet extends HttpServlet {
                 String rut = request.getParameter("buscarPorRut");
                 List<Casa> lista = dc.buscarPorRut(rut);
 
-                Casa c = (Casa) lista.toArray()[0];
-                //String nomProp=c.getNomPropietario();
+                Casa c = null;
 
-                request.getSession().setAttribute("casaProp", c);
-                request.getSession().setAttribute("listaDeCasas", lista);
-                
-                redireccionaA="listarCasas.jsp";
+                try {
+                    c = lista.get(0);
+                } catch (Exception e) {
+                }
+
+                //String nomProp=c.getNomPropietario();
+                if (c == null) {
+                    c = new Casa();
+                    c.setId(0);
+                    c.setDireccion("Sin dirección");
+                    c.setMetrosCuadrados(0);
+                    c.setAvaluoFiscal(0);
+                    c.setNomPropietario("Desconocido");
+                    c.setRutPropietario(rut);
+
+                    request.getSession().setAttribute("casaProp", c);
+                    request.getSession().setAttribute("listaDeCasas", lista);
+
+                    redireccionaA = "listarCasas.jsp";
+                } else if (c != null) {
+                    request.getSession().setAttribute("casaProp", c);
+                    request.getSession().setAttribute("listaDeCasas", lista);
+
+                    redireccionaA = "listarCasas.jsp";
+                }
+
             }
 
             response.sendRedirect(redireccionaA);

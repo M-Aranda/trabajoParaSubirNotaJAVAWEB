@@ -35,7 +35,7 @@
         <h1>Crear casas</h1>
         <br>
         <form action="crearCasa.do" method="POST">
-            <input type="text" name="rol" placeholder="Rol" required>
+            <input type="number" name="rol" placeholder="Rol" required>
             <br>
             <input type="text" name="direccion" placeholder="Dirección" required>
             <br>
