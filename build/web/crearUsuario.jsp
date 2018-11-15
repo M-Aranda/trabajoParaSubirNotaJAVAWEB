@@ -33,9 +33,9 @@
             <br>
             <input type="password" name="contrasenia"  placeholder="Contraseña:" required>
             <br>
-            <input type="radio" name="tipo" value="2">Administrador
+            <input type="radio" name="tipo" value="2" >Administrador
             <br>
-            <input type="radio" name="tipo" value="1" placeholder="Usuario Normal">Usuario Normal
+            <input type="radio" name="tipo" value="1"  required placeholder="Usuario Normal">Usuario Normal
             <br>
             <input type="submit" value="Crear Usuario">
         </form>

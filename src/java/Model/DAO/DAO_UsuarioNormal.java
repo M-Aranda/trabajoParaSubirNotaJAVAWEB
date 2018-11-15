@@ -26,7 +26,9 @@ public class DAO_UsuarioNormal extends Conexion implements DAO<UsuarioNormal> {
 
     @Override
     public void create(UsuarioNormal ob) throws SQLException {
-        ejecutar("INSERT INTO usuarioNormal VALUES (NULL, '" + ob.getRut() + "', '" + ob.getNombre() + "', '" + ob.getContrasenia() + "', " + ob.getRol().getId() + "  )");
+        if (idSeRepite(ob.getId()) == false) {
+            ejecutar("INSERT INTO usuarioNormal VALUES (NULL, '" + ob.getRut() + "', '" + ob.getNombre() + "', '" + ob.getContrasenia() + "', " + ob.getRol().getId() + "  )");
+        }
     }
 
     @Override
@@ -104,7 +106,7 @@ public class DAO_UsuarioNormal extends Conexion implements DAO<UsuarioNormal> {
         try {
 
             DAO_Rol dr = new DAO_Rol();
-            ResultSet rs = ejecutar("SELECT * FROM usuarioNormal WHERE rut='"+rut+"' AND contrasenia='"+contrasenia+"'  ");
+            ResultSet rs = ejecutar("SELECT * FROM usuarioNormal WHERE rut='" + rut + "' AND contrasenia='" + contrasenia + "'  ");
             while (rs.next()) {
                 u = new UsuarioNormal();
                 u.setId(rs.getInt(1));
@@ -123,13 +125,12 @@ public class DAO_UsuarioNormal extends Conexion implements DAO<UsuarioNormal> {
         return u;
     }
 
-    
     public UsuarioNormal findById(int id) throws SQLException {
         UsuarioNormal u = null;
         try {
 
             DAO_Rol dr = new DAO_Rol();
-            ResultSet rs = ejecutar("SELECT * FROM usuarioNormal WHERE id="+id+" ");
+            ResultSet rs = ejecutar("SELECT * FROM usuarioNormal WHERE id=" + id + " ");
             while (rs.next()) {
                 u = new UsuarioNormal();
                 u.setId(rs.getInt(1));
@@ -147,5 +148,16 @@ public class DAO_UsuarioNormal extends Conexion implements DAO<UsuarioNormal> {
         close();
         return u;
     }
-    
+
+    public Boolean idSeRepite(int id) throws SQLException {
+        Boolean seRepite = false;
+
+        UsuarioNormal u = findById(id);
+        if (u != null) {
+            seRepite = true;
+        }
+
+        return seRepite;
+    }
+
 }

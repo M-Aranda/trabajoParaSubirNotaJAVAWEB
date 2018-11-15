@@ -25,7 +25,10 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
     @Override
     public void create(Casa ob) throws SQLException {
         //ejecutar("INSERT INTO casa VALUES (NULL, '" + ob.getDireccion() + "', " + ob.getMetrosCuadrados() + ", '" + ob.getRutPropietario()+ "','"+ob.getNomPropietario()+"', " + ob.getAvaluoFiscal() + "    )");
-        ejecutar("INSERT INTO casa VALUES ("+ob.getId()+", '" + ob.getDireccion() + "', " + ob.getMetrosCuadrados() + ", '" + ob.getRutPropietario()+ "','"+ob.getNomPropietario()+"', " + ob.getAvaluoFiscal() + "    )");
+
+        if (idSeRepite(ob.getId()) == false) {
+            ejecutar("INSERT INTO casa VALUES (" + ob.getId() + ", '" + ob.getDireccion() + "', " + ob.getMetrosCuadrados() + ", '" + ob.getRutPropietario() + "','" + ob.getNomPropietario() + "', " + ob.getAvaluoFiscal() + "    )");
+        }
     }
 
     @Override
@@ -33,16 +36,16 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
         List<Casa> lista = new ArrayList<>();
         ResultSet rs = ejecutar("SELECT * FROM casa");
 
-        Casa c=null;
+        Casa c = null;
         while (rs.next()) {
-            c= new Casa();
+            c = new Casa();
             c.setId(rs.getInt(1));
             c.setDireccion(rs.getString(2));
             c.setMetrosCuadrados(rs.getInt(3));
             c.setRutPropietario(rs.getString(4));
             c.setNomPropietario(rs.getString(5));
             c.setAvaluoFiscal(rs.getInt(6));
-            
+
             lista.add(c);
         }
 
@@ -52,7 +55,10 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
 
     @Override
     public void update(Casa ob) throws SQLException {
-        ejecutar("UPDATE casa SET direccion='" + ob.getDireccion() + "', metrosCuadrados=" + ob.getMetrosCuadrados() + ", rutProp='" + ob.getRutPropietario()+ "',nomPropietario='"+ob.getNomPropietario()+"', avaluoFiscal=" + ob.getAvaluoFiscal() + " WHERE id=" + ob.getId() + "   ");
+        if (idSeRepite(ob.getId()) == false) {
+            ejecutar("UPDATE casa SET direccion='" + ob.getDireccion() + "', metrosCuadrados=" + ob.getMetrosCuadrados() + ", rutProp='" + ob.getRutPropietario() + "',nomPropietario='" + ob.getNomPropietario() + "', avaluoFiscal=" + ob.getAvaluoFiscal() + " WHERE id=" + ob.getId() + "   ");
+        }
+
     }
 
     @Override
@@ -60,13 +66,13 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
         ejecutar("DELETE FROM casa WHERE id=" + id + " ");
     }
 
-    public Casa findById(int id) throws SQLException{
-        Casa c=null;
-        
-        ResultSet rs=ejecutar("SELECT * FROM casa WHERE id="+id+" ");
-        
-        if(rs.next()){
-            c=new Casa();
+    public Casa findById(int id) throws SQLException {
+        Casa c = null;
+
+        ResultSet rs = ejecutar("SELECT * FROM casa WHERE id=" + id + " ");
+
+        if (rs.next()) {
+            c = new Casa();
             c.setId(rs.getInt(1));
             c.setDireccion(rs.getString(2));
             c.setMetrosCuadrados(rs.getInt(3));
@@ -74,45 +80,41 @@ public class DAO_Casa extends Conexion implements DAO<Casa> {
             c.setNomPropietario(rs.getString(5));
             c.setAvaluoFiscal(rs.getInt(6));
         }
-        
+
         close();
         return c;
     }
-    
-    
-    
-     public List<Casa> buscarPorRut(String rut) throws SQLException {
-        List<Casa> lista = new ArrayList<>();
-        ResultSet rs = ejecutar("SELECT * FROM casa WHERE rutProp='"+rut+"' ");
 
-        Casa c=null;
+    public List<Casa> buscarPorRut(String rut) throws SQLException {
+        List<Casa> lista = new ArrayList<>();
+        ResultSet rs = ejecutar("SELECT * FROM casa WHERE rutProp='" + rut + "' ");
+
+        Casa c = null;
         while (rs.next()) {
-            c= new Casa();
+            c = new Casa();
             c.setId(rs.getInt(1));
             c.setDireccion(rs.getString(2));
             c.setMetrosCuadrados(rs.getInt(3));
             c.setRutPropietario(rs.getString(4));
             c.setNomPropietario(rs.getString(5));
             c.setAvaluoFiscal(rs.getInt(6));
-            
+
             lista.add(c);
         }
 
         close();
         return lista;
     }
-     
-     
-     public Boolean idSeRepite(int id) throws SQLException{
-         Boolean seRepite=false;
-         
-         Casa c=findById(id);
-         if(c==null){
-             seRepite=true;
-         }
-         
-         return seRepite;
-     }
-    
-    
+
+    public Boolean idSeRepite(int id) throws SQLException {
+        Boolean seRepite = false;
+
+        Casa c = findById(id);
+        if (c != null) {
+            seRepite = true;
+        }
+
+        return seRepite;
+    }
+
 }

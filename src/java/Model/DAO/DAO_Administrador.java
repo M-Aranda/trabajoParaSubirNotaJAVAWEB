@@ -26,7 +26,10 @@ public class DAO_Administrador extends Conexion implements DAO<Administrador> {
 
     @Override
     public void create(Administrador ob) throws SQLException {
-        ejecutar("INSERT INTO administrador VALUES (NULL, '" + ob.getRut() + "', '" + ob.getNombre() + "', '" + ob.getContrasenia() + "', '" + ob.getRol().getId() + "' ) ");
+        if (idSeRepite(ob.getId())==false) {
+            ejecutar("INSERT INTO administrador VALUES (NULL, '" + ob.getRut() + "', '" + ob.getNombre() + "', '" + ob.getContrasenia() + "', '" + ob.getRol().getId() + "' ) ");
+
+        }
     }
 
     @Override
@@ -66,7 +69,7 @@ public class DAO_Administrador extends Conexion implements DAO<Administrador> {
     public void delete(int id) throws SQLException {
         ejecutar("DELETE FROM administrador WHERE id=" + id + " ");
     }
-    
+
     public Boolean adminCorrecto(String rut, String contrasenia) throws SQLException {
         Boolean datosCorrectos = false;
         try {
@@ -93,20 +96,18 @@ public class DAO_Administrador extends Conexion implements DAO<Administrador> {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DAO_UsuarioNormal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         close();
         return datosCorrectos;
 
     }
-    
-    
-    
+
     public Administrador findByRutContr(String rut, String contrasenia) throws SQLException {
         Administrador a = null;
         try {
 
             DAO_Rol dr = new DAO_Rol();
-            ResultSet rs = ejecutar("SELECT * FROM administrador WHERE rut='"+rut+"' AND contrasenia='"+contrasenia+"'  ");
+            ResultSet rs = ejecutar("SELECT * FROM administrador WHERE rut='" + rut + "' AND contrasenia='" + contrasenia + "'  ");
             while (rs.next()) {
                 a = new Administrador();
                 a.setId(rs.getInt(1));
@@ -124,14 +125,13 @@ public class DAO_Administrador extends Conexion implements DAO<Administrador> {
         close();
         return a;
     }
-    
-    
-        public Administrador findById(int id) throws SQLException {
+
+    public Administrador findById(int id) throws SQLException {
         Administrador a = null;
         try {
 
             DAO_Rol dr = new DAO_Rol();
-            ResultSet rs = ejecutar("SELECT * FROM administrador WHERE id="+id+"");
+            ResultSet rs = ejecutar("SELECT * FROM administrador WHERE id=" + id + "");
             while (rs.next()) {
                 a = new Administrador();
                 a.setId(rs.getInt(1));
@@ -149,8 +149,16 @@ public class DAO_Administrador extends Conexion implements DAO<Administrador> {
         close();
         return a;
     }
-    
-    
-    
+
+    public Boolean idSeRepite(int id) throws SQLException {
+        Boolean seRepite = false;
+
+        Administrador a = findById(id);
+        if (a != null) {
+            seRepite = true;
+        }
+
+        return seRepite;
+    }
 
 }
